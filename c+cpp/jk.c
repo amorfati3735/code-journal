@@ -1,5 +1,5 @@
 # import <stdio.h>
 int main(){
-    printf("init");
+    printf("init commit check");
     return 0;
 }
