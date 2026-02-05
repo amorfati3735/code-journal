@@ -1,0 +1,12 @@
+def twoSum(nums, target):
+    seen = {}
+    for i, x in enumerate(nums):
+        if target - x in seen:
+            return [seen[target - x], i]
+        seen[x] = i
+
+ar=list(map(int,input().split()))
+num=int(input())
+
+print(twoSum(ar,num))
+

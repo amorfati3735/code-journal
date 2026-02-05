@@ -1,0 +1,9 @@
+# ignore Windows executables
+*.exe
+
+# ignore common build outputs
+a.out
+*.o
+
+# optional: temp files
+tempCodeRunnerFile*

@@ -1,0 +1,63 @@
+#include <stdio.h>
+
+int main()
+{
+    int n, p[20], bt[20], pri[20], wt[20], tat[20], i, j, temp;
+    float avwt = 0, avtat = 0;
+
+    printf("Enter number of processes: ");
+    scanf("%d", &n);
+
+    printf("\nEnter Burst Time and Priority (Lower value = Higher Priority):\n");
+    for (i = 0; i < n; i++)
+    {
+        p[i] = i + 1;
+        printf("P[%d] Burst & Priority: ", i + 1);
+        scanf("%d %d", &bt[i], &pri[i]);
+    }
+
+    // Sorting by Priority (Ascending)
+    for (i = 0; i < n; i++)
+    {
+        for (j = 0; j < n - i - 1; j++)
+        {
+            if (pri[j] > pri[j + 1])
+            {
+                // Swap Priority
+                temp = pri[j];
+                pri[j] = pri[j + 1];
+                pri[j + 1] = temp;
+                // Swap Burst Time
+                temp = bt[j];
+                bt[j] = bt[j + 1];
+                bt[j + 1] = temp;
+                // Swap PID
+                temp = p[j];
+                p[j] = p[j + 1];
+                p[j + 1] = temp;
+            }
+        }
+    }
+
+    // Calculation
+    wt[0] = 0;
+    for (i = 1; i < n; i++)
+    {
+        wt[i] = wt[i - 1] + bt[i - 1];
+    }
+
+    printf("\nProcess\t\tPriority\tBurst Time\tWaiting Time\tTurnaround Time");
+
+    for (i = 0; i < n; i++)
+    {
+        tat[i] = bt[i] + wt[i];
+        avwt += wt[i];
+        avtat += tat[i];
+        printf("\nP[%d]\t\t%d\t\t%d\t\t%d\t\t%d", p[i], pri[i], bt[i], wt[i], tat[i]);
+    }
+
+    printf("\n\nAverage Waiting Time: %.2f", avwt / n);
+    printf("\nAverage Turnaround Time: %.2f\n", avtat / n);
+
+    return 0;
+}
